@@ -1,12 +1,10 @@
 // server.js
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const dbConfig = require('./database.config.js');
 
-
 // initialize our express app
-const app = express()
+const app = express();
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -14,37 +12,32 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
 
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin",
-    "http://localhost:5200");
-  res.header("Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
-
 // Connecting to the database
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/hw6db',
-{ useMongoClient: true });
+{  });
 mongoose.Promise = global.Promise;
 
-// define a simple route
-app.get('/', (req, res) => {
-    res.json({"message": "Welcome"});
-})
+const applicationRouter = require('./routes/apis/application');
+const componentRouter = require('./routes/apis/component');
+const developerRouter = require('./routes/apis/developer');
+const viewRouter = require('./routes/apis/view');
+const widgetRouter = require('./routes/apis/widget');
+require('./models/developer/developer.model.server');
+require('./models/application/application.model.server');
+require('./models/component/component.model.server');
+require('./models/View/view.model.server');
+require('./models/Widget/widget.model.server');
 
-app.get('/message/:theMessage', function (req, res) {
-  var theMessage = req.params['theMessage'];
-  res.send(theMessage);
-})
 
-var developerService = require('./services/developer.service.server');
-developerService(app);
+app.use('/api/developer', developerRouter);
+app.use('/api/application', applicationRouter);
+app.use('/api/component', componentRouter);
+app.use('/api/component', componentRouter);
+app.use('/api/view', viewRouter);
+app.use('/api/widget', widgetRouter);
 
+module.exports = app;
 
 let port = 3000;
 app.listen(port, () => {

@@ -1,8 +1,6 @@
 
-
-var Application = require('../models/application/application.model.server');
-var Developer = require('../models/developer/developer.model.server');
-
+var Application = require('../../models/application/application.model.server');
+var Developer = require('../../models/developer/developer.model.server');
 var express = require('express');
 var router = express.Router();
 

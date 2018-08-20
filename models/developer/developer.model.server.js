@@ -5,38 +5,9 @@ var developerModel = mongoose.model(
   developerSchema
 );
 
+developerModel.findAllDevelopers = findAllDevelopers;
+module.exports = developerModel;
 
-function createDeveloper(developer){
-  return developerModel.create(developer);
+function findAllDevelopers(){
+  return developerModel.find();
 }
-
-function findAllDeveloper(){
-  return developerModel.find([username]);
-}
-
-function findDeveloper(userId){
-  return developerModel.findById(userId);
-}
-
-
-function deleteDeveloper(userId){
-  return developerModel.delete(userId);
-}
-
-function updateDeveloper(userId){
-  return developerModel.update({
-    _id: userId
-  },{
-
-  });
-}
-
-var api={
-createDeveloper: createDeveloper,
-findAllDeveloper: findAllDeveloper,
-findDeveloper: findDeveloper,
-deleteDeveloper: deleteDeveloper,
-updateDeveloper: updateDeveloper
-};
-
-module.exports = api;
