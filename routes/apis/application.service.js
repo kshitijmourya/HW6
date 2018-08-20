@@ -18,8 +18,8 @@ router.get('/:aid', (req, res) => {
         .catch(err => res.status(503).send(err))
 });
 
-router.put('/:aid', (req, res) => {
-    Application.findByIdAndUpdate(req.params.aid,
+  router.put('/:aid', (req, res) => {
+      Application.findByIdAndUpdate(req.params.aid,
         {name: req.body.name},
         {'new': true})
         .exec()

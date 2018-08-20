@@ -18,11 +18,11 @@ mongoose.connect('mongodb://localhost/hw6db',
 {  });
 mongoose.Promise = global.Promise;
 
-const applicationRouter = require('./routes/apis/application');
-const componentRouter = require('./routes/apis/component');
-const developerRouter = require('./routes/apis/developer');
-const viewRouter = require('./routes/apis/view');
-const widgetRouter = require('./routes/apis/widget');
+const applicationRouter = require('./routes/apis/application.service');
+const componentRouter = require('./routes/apis/component.service');
+const developerRouter = require('./routes/apis/developer.service');
+const viewRouter = require('./routes/apis/view.service');
+const widgetRouter = require('./routes/apis/widget.service');
 require('./models/developer/developer.model.server');
 require('./models/application/application.model.server');
 require('./models/component/component.model.server');

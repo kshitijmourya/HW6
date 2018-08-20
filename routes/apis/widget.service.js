@@ -28,8 +28,6 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:wid', (req, res) => {
-    console.log('call wid');
-    console.log(req.params, req.body);
     Widget.findByIdAndUpdate(
         req.params.wid,
         req.body,

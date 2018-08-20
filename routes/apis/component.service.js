@@ -38,7 +38,7 @@ router.delete('/:cid', (req, res) => {
         .catch(err => res.status(503).send(err));
 });
 
-// for view
+
 router
     .get('/:cid/view', (req, res) => {
         Component.findById(req.params.cid)
@@ -50,16 +50,7 @@ router
             .then(c => res.json(c.view))
             .catch(err => res.status(503).send(err));
     })
-    .post('/:cid/view', (req, res) => {
-        const view = new View(req.body);
-        view.save()
-            .then(v => Component.findByIdAndUpdate(
-                req.params.cid,
-                {'$set': {view: v.id}},
-                {'new': true})
-                .exec()
-                .then(() => res.json(v)))
-            .catch(err => res.status(503).send(err));
-    });
+
+    
 
 module.exports = router;
